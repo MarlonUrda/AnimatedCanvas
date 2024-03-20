@@ -1,4 +1,5 @@
 import Player from "./js/Player.js";
+import Sprite from "./js/Sprite.js";
 
 export const canvas = document.createElement("canvas");
 export const canctx = canvas.getContext("2d");
@@ -7,6 +8,33 @@ canvas.width = 1024;
 canvas.height = 574;
 
 export const gravity = 0.5;
+
+const spike = new Sprite({
+  position: {
+    x: 300,
+    y: 500,
+  },
+  imageSrc: "./i/Spikes.png",
+  frameRate: 4,
+  frameBuffer: 5,
+});
+
+const pl2 = new Player({
+  position: {
+    x: 500,
+    y: 300,
+  },
+
+  imageSrc: "./i/Idle.png",
+  frameRate: 4,
+  animations: {
+    Idle: {
+      imageSrc: "./i/Idle.png",
+      frameRate: 4,
+      frameBuffer: 67,
+    },
+  },
+});
 
 const player = new Player({
   position: {
@@ -19,7 +47,7 @@ const player = new Player({
     Idle: {
       imageSrc: "./img/warrior/Idle.png",
       frameRate: 8,
-      frameBuffer: 3,
+      frameBuffer: 9,
     },
     Run: {
       imageSrc: "./img/warrior/Run.png",
@@ -75,6 +103,8 @@ const animate = () => {
   canctx.fillRect(0, 0, canvas.width, canvas.height);
 
   player.update();
+  pl2.update();
+  spike.update();
 
   player.velocity.x = 0;
 
